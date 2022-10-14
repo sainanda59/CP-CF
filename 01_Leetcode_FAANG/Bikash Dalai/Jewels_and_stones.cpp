@@ -1,26 +1,20 @@
 class Solution {
 public:
-    int numJewelsInStones(string J, string S) {
-        map<char, int> m;
-        
-        for(int i = 0; i < J.size(); i++){
-            if(m.find(J[i]) == m.end()){
-                m[J[i]] = 1;
-            }
-            else{
-                m[J[i]]++;
+    int numJewelsInStones(string jewels, string stones) {
+        map<char,int> m;
+        for(int i=0;i<jewels.size();i++)
+        {
+            m[jewels[i]]++;
+        }
+        int count=0;
+        for(int i=0;i<stones.size();i++)
+        {
+            if(m[stones[i]]>0)
+            {
+                count++;
             }
         }
         
-        int ans = 0;
-        
-        for(int i = 0; i < S.size(); i++){
-            if(m.find(S[i]) != m.end()){
-                ans++;
-            }
-        }
-            
-            
-        return ans;
+        return count;
     }
 };
