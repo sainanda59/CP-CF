@@ -9,11 +9,10 @@ public:
                 if(nums[i]+nums[j]==target)
                 {    f.insert(f.begin(),i);
                      f.insert(f.begin()+1,j);
-                     goto last;
+                     break;
                 }
             }
         }
-        last:
         return f;    
     }
 };
