@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int destroyTargets(vector<int>& nums, int space) {
+        sort(nums.begin(),nums.end());
+        int mini=nums[0];
+        int ans=0;
+      
+        for(int i=0;i<nums.size();i++)
+        {
+            int c=0;
+            for(int j=i;j<nums.size();j++)
+            {
+                  int x=(nums[j]-nums[i]);
+                  
+                  if(x>=0&&(x%space==0))
+                  {
+                      //cout<<nums[i]<<" ";
+                      c++;
+                  }
+                
+                               
+            }
+         //   cout<<c<<"\n";
+            if(ans<c)
+            {
+                ans=c;
+                mini=nums[i];
+            }
+        }
+        return mini;
+        
+    }
+};
