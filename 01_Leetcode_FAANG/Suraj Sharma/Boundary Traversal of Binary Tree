@@ -1,0 +1,76 @@
+class Solution {
+public:
+    vector <int> boundary(Node *root)
+    {
+        if(root==NULL)
+        return {};
+        if(!root->left&&!root->right)
+        return {root->data};
+         vector<int> leaf;
+        vector<int> left=leftTraversal(root->left);
+        vector<int> right=rightTraversal(root);
+       leafNode(root,leaf);
+        vector<int> ans;
+        ans.push_back(root->data);
+        for(int i=0;i<left.size();i++)
+        ans.push_back(left[i]);
+        
+        for(int i=0;i<leaf.size();i++)
+        ans.push_back(leaf[i]);
+        
+        for(int i=0;i<right.size();i++)
+        ans.push_back(right[i]);
+        
+        return ans;
+       // return leaf;
+    }
+    vector<int> leftTraversal(Node* root)
+    {
+        if(root==NULL)
+        return {};
+        vector<int> ans;
+        while(root->left||root->right)
+        {
+            ans.push_back(root->data);
+            if(root->left)
+            root=root->left;
+            else if(root->right)
+            root=root->right;
+        }
+        return ans;
+        
+    }
+     vector<int> rightTraversal(Node* root)
+    {
+        if(root->right==NULL)
+        return {};
+        vector<int> ans;
+        while(root->left||root->right)
+        {
+            ans.push_back(root->data);
+            if(root->right)
+            root=root->right;
+            else if(root->left)
+            root=root->left;
+            
+        }
+        reverse(ans.begin(),ans.end());
+        ans.pop_back();
+        return ans;
+        
+    }
+    void leafNode(Node* root,vector<int>& leaf)
+    {
+        if(root==NULL)
+        return;
+        if(!root->left&&!root->right)
+        {
+            leaf.push_back(root->data);
+            return;
+        }
+        if(root->left)
+     leafNode(root->left,leaf);
+        if(root->right)
+        leafNode(root->right,leaf);
+    }
+};
